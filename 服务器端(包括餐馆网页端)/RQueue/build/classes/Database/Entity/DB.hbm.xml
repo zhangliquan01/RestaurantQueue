@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping>
+	<!-- class mapping in hibernate -->
+	<!-- User table -->
+	<class name="Database.Entity.User" table="User" schema="queue">
+		<id name="userid"></id>
+		<property name="name"></property>
+		<property name="password"></property>
+		<property name="gender"></property>
+		<property name="phone"></property>
+		<property name="imageurl"></property>
+	</class>
+	<!-- Restaurant table -->
+	<class name="Database.Entity.Restaurant" table="Restaurant" schema="queue">
+		<id name="restid"></id>
+		<property name="name"></property>
+		<property name="type"></property>
+		<property name="address"></property>
+		<property name="longitude"></property>
+		<property name="latitude"></property>
+		<property name="phone"></property>
+		<property name="depiction"></property>
+		<property name="imageurl"></property>
+	</class>
+	<!-- Restaurant account table -->
+	<class name="Database.Entity.RestAccount" table="RestAccount" schema="queue">
+		<id name="restaccountid"></id>
+		<property name="phone"></property>
+		<property name="password"></property>
+		<property name="restid"></property>
+	</class>
+	<!-- Dish table -->
+	<class name="Database.Entity.Dish" table="Dish" schema="queue">
+		<id name="dishid"></id>
+		<property name="restid"></property>
+		<property name="name"></property>
+		<property name="groups"></property>
+		<property name="price"></property>
+		<property name="depiction"></property>
+		<property name="imageurl"></property>
+	</class>
+	<!-- Record table -->
+	<class name="Database.Entity.Record" table="Record" schema="queue">
+		<id name="recordid"></id>
+		<property name="restid"></property>
+		<property name="userid"></property>
+		<property name="time"><column name="time" not-null="true" sql-type="datetime"/></property>
+		<property name="cost"></property>
+	</class>
+	<!-- Comments table -->
+	<class name="Database.Entity.Comments" table="Comments" schema="queue">
+		<id name="commentid"></id>
+		<property name="restid"></property>
+		<property name="userid"></property>
+		<property name="depiction"></property>
+	</class>
+	<!-- Like table -->
+	<class name="Database.Entity.Like" table="Like" schema="queue">
+		<composite-id>
+			<key-property name="userid">
+				<column name="userid"/>
+			</key-property>
+			<key-property name="restid">
+				<column name="restid"/>
+			</key-property>
+		</composite-id>
+	</class>
+	<!-- Booking table -->
+	<class name="Database.Entity.Booking" table="Booking" schema="queue">
+		<id name="bookid"></id>
+		<property name="userid"></property>
+		<property name="restid"></property>
+		<property name="booktime"><column name="booktime" not-null="true" sql-type="datetime"/></property>
+		<property name="dinning_time"><column name="dinning_time" not-null="true" sql-type="datetime"/></property>
+	</class>
+	<!-- Queue table -->
+	<class name="Database.Entity.Queue" table="Queue" schema="queue">
+		<id name="queueid"></id>
+		<property name="userid"></property>
+		<property name="restid"></property>
+		<property name="time"><column name="time" not-null="true" sql-type="datetime"/></property>
+		<property name="state"></property>
+	</class>
+</hibernate-mapping> 

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.locale" value="zh_cn" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	
+	<package name="Website" extends="struts-default" namespace="/website">
+	
+		<!-- website services -->
+		<action name="home">
+			<result>/index.jsp</result>
+		</action>
+		<action name="register" class="Website.UserWebAction" method="Register">
+			<result name="SUCCESS" type="redirectAction">usercenter</result>
+			<result name="FAILED">/register.jsp</result>
+		</action>
+		<action name="login" class="Website.UserWebAction" method="LoginCheck">
+			<result name="SUCCESS" type="redirectAction">usercenter</result>
+			<result name="FAILED">/login.jsp</result>
+		</action>
+		<action name="usercenter" class="Website.UserWebAction" method="AccessUserCenter">
+			<result name="SUCCESS">/usercenter.jsp</result>
+			<result name="LOGIN_FAILED" type="redirectAction">login</result>
+		</action>
+		
+		<!-- Dish Actions -->
+		<action name="newdish" class="Website.DishesWebAction" method="createNewDish">
+			<result name="SUCCESS">/newDishSuccess.jsp</result>
+			<result name="FAILED">/newDish.jsp</result>
+			<result name="LOGIN_FAILED">/login.jsp</result>
+		</action>
+		<action name="alldishlist" class="Website.DishesWebAction" method="getAllDishList">
+			<result name="SUCCESS">/allDishes.jsp</result>
+			<result name="FAILED">/allDishes.jsp</result>
+			<result name="LOGIN_FAILED">/login.jsp</result>
+		</action>
+		
+		<!-- Queue Actions -->
+		<action name="allqueuelist" class="Website.QueueWebAction" method="getAllQueueList">
+			<result name="SUCCESS">/allQueueList.jsp</result>
+			<result name="FAILED">/allQueueList.jsp</result>
+			<result name="LOGIN_FAILED" type="redirectAction">login</result>
+		</action>
+		<action name="currentqueuelist" class="Website.QueueWebAction" method="getCurrentQueueList">
+			<result name="SUCCESS">/currentQueueList.jsp</result>
+			<result name="FAILED">/currentQueueList.jsp</result>
+			<result name="LOGIN_FAILED" type="redirectAction">login</result>
+		</action>
+		<action name="callfornewnumber" class="Website.QueueWebAction" method="CallForANumber">
+			<result name="SUCCESS">/callNewNumber.jsp</result>
+			<result name="LOAD_SUCCESS">/callNewNumber.jsp</result>
+			<result name="FAILED">/callNewNumber.jsp</result>
+			<result name="LOGIN_FAILED" type="redirectAction">login</result>
+		</action>
+		
+	</package>
+</struts>
